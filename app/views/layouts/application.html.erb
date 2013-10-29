@@ -36,7 +36,7 @@
         </button>
       </div>
       <div class="navbar-collapse collapse" id="navbar-main">
-        <% if @user %>
+        <% if @app_user %>
         <ul class="nav navbar-nav">
           <li>
             <%= link_to htitle(:sample), :controller => :samples %>
@@ -44,14 +44,14 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">マスタ<span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a tabindex="-1" href="<%#= users_url %>">ユーザー</a></li>
+              <li><a tabindex="-1" href="<%= users_url %>"><%= htitle(:user) %></a></li>
               <li class="divider"></li>
             </ul>
           </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a><%= "#{@user.name} さん" %></a></li>
+          <li><a><%= "#{@app_user.name} さん" %></a></li>
           <li><%= link_to("パスワード変更",   "javascript:void(0);", :onclick => sanitize("javascript:pop('" + url_for(:controller => :auth, :action => :password ) + "', '600', 'passwordsetting');")) %></li>
           <li><%= link_to('ログアウト', :controller => :auth, :action => :logout ) %></li>
         </ul>

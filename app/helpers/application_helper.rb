@@ -357,7 +357,7 @@ EOS
       <div class="input-group">
 #{file_field_tag(:file)}
       <span class="input-group-btn">
-#{link_to button_tag("インポート", :type => :submit, :class=> "btn btn-primary", :confirm => "インポートしますか？")}
+#{button_tag("インポート", type: :submit, class: "btn btn-primary", confirm: "インポートしますか？")}
       </span>
       </div>
       </div>
@@ -405,7 +405,7 @@ EOS
     controller = options[:controller] || controller_name
     confirm    = options[:conf] || "削除してもよろしいですか？"
 
-    link_to button_tag(value, class: "btn btn-alert pull-right"), obj, {controller: controller, method: :delete}, {confirm: confirm}
+    link_to button_tag(value, class: "btn btn-alert pull-right"), obj, {controller: controller, method: :delete, confirm: confirm}
   end
 
   # 一覧ボタン
@@ -432,16 +432,6 @@ EOS
     confirm    = options[:confirm]
 
     button_tag(value, class: "btn btn-primary", type: :submit ,confirm: confirm)
-  end
-
-  # ポップ
-  def pop_button_tag(path, size, elm, type, options = {})
-    link_to button_tag("検索", class: "btn btn-default"), "javascript:popSearch('" + path + "','" + size.to_s + "','" + elm + "','','" + type + "');"
-  end
-
-  # 検索ポップアップ
-  def pop_search_tag(elm, type)
-    pop_button_tag('/search', 750, elm, type)
   end
 
   # CSV出力ボタン
@@ -471,6 +461,16 @@ EOS
 
     url = url_for(params.merge(params))
     link_to button_tag(value, class: "btn btn-default pull-right", style: "margin: 21px 1px"), url, {confirm: confirm, target: '_blank'}
+  end
+
+  # ポップ
+  def pop_button_tag(path, size, elm, type, options = {})
+    link_to button_tag("検索", class: "btn btn-default"), "javascript:popSearch('" + path + "','" + size.to_s + "','" + elm + "','','" + type + "');"
+  end
+
+  # 検索ポップアップ
+  def pop_search_tag(elm, type)
+    pop_button_tag('/search', 750, elm, type)
   end
 
   # 閉じるボタン

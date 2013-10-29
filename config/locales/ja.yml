@@ -197,15 +197,18 @@ ja:
       <<: *errors
     models:
       sample: "サンプル"
+      user: "ユーザー"
       master: "マスタ管理"
     attributes:
       member:
         id: "ID"
         name: "メンバ"
       user:
-        id: "ユーザーNO"
+        id: "ID"
+        account: "ログインID"
         name: "名前"
         account: "ログインアカウント"
+        password: "パスワード"
         password_required: "現在のパスワード"
         password_new: "新しいパスワード"
         password_confirmation: "新しいパスワードの確認"

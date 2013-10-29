@@ -38,8 +38,8 @@ protected
   def authorize
     begin
       raise unless session[:user_id]
-      @user = User.find(session[:user_id])
-      raise unless @user
+      @app_user = User.find(session[:user_id])
+      raise unless @app_user
       @app_search = ApplicationSearch.new(params) if action_name == :index.to_s
     rescue => e
       logger.error(e.message)

@@ -31,7 +31,7 @@ class AuthController < ApplicationController
 
   def password
     @display_type = DISPLAY_TYPE_SIMPLE
-    @user = User.find(session[:user_id])
+    @app_user = User.find(session[:user_id])
   end
 
   def change
