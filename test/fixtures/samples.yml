@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  cd: MyString
+  kana: MyString
+  url: MyString
+  status: 
+  memo: MyText
+  visible: 
+
+two:
+  name: MyString
+  cd: MyString
+  kana: MyString
+  url: MyString
+  status: 
+  memo: MyText
+  visible: 

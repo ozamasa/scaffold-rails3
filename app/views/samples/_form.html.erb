@@ -1,0 +1,35 @@
+<div class="well">
+<%= required_notice_tag %>
+<%= form_for @sample, html: {class: "bs-example form-horizontal"} do |f| %>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :id, class: "col-lg-1 control-label" %>
+      <div class="col-lg-11">
+        <%= h @sample.id %>
+      </div>
+    </div>
+<style>
+}
+</style>
+    <div class="form-group">
+      <%= f.label :name, class: "col-lg-1 control-label #{required}" %>
+      <div class="col-lg-11">
+        <%= f.text_field :name, class: "form-control" unless show? %>
+        <%= h @sample.name if show? %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :kana, class: "col-lg-1 control-label" %>
+      <div class="col-lg-11">
+        <%= f.text_field :kana, class: "form-control" unless show? %>
+        <%= h @sample.kana if show? %>
+      </div>
+    </div>
+
+    <div class="form-actions col-lg-offset-1">
+<%= submit_button_tag %>
+<%= index_button_tag %>
+    </div>
+  </fieldset>
+<% end %>
+</div>

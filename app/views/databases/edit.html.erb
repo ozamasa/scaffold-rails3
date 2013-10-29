@@ -1,0 +1,61 @@
+<% form_for(@database, :url => { :action => :update, :tablename => @tablename }, :html => { :method => :put }) do |f| %>
+
+<%#= menu %>
+<div id="contents">
+<%#= submenu %>
+
+<div id="main">
+
+<%= message %>
+
+<%= pagetitle :title => "database [" + @tablename + "]" %>
+
+<div class="sheet">
+
+<%= error_messages(@database) %>
+<%= flash_tag %>
+
+<% content_for :button do %>
+<div class="commonBtnArea">
+<div class="centerBox">
+<%#= delete_button_tag(Class.new(ActiveRecord::Base).set_table_name(@tablename)) %>
+<%# obj = Class.new(ActiveRecord::Base).set_table_name(@tablename) %>
+<%= link_to image_tag('/images/btn_delete.png', :alt => '削除', :style => 'float: right;'), {:action => :destroy}, :confirm => '削除してもよろしいですか？', :method => :delete %>
+<%= submit_button_tag(f, :value => '/images/btn_update.png') %>
+<%= index_button_tag %>
+</div>
+<!--/ commonBtnArea--></div>
+<% end %>
+
+<%#= yield :button %>
+
+<%= pagesubtitle %>
+<%= required_notice_tag %>
+
+<table class="commonSheet">
+<% @columns.each do |column| %>
+<tr>
+<th><%= f.label column.name %><%#=hlabel @tablename.singularize, column.name %></th>
+<td>
+  <% if ["id","created_at","updated_at"].include?(column.name) -%>
+  <% if column.type.to_s == "datetime" -%>
+  <%=hdatetime @database[column.name] -%>
+  <% else -%>
+  <%=h @database[column.name] -%>
+  <% end -%>
+  <% else -%>
+  <%= f.text_field column.name -%>
+  <% end -%>
+</td>
+</tr>
+<% end %>
+</table>
+
+</div>
+
+<%= yield :button %>
+
+<!--/ #main--></div>
+<!--/ #contents--></div>
+
+<% end %>

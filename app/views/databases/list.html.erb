@@ -1,0 +1,50 @@
+<%#= menu %>
+
+<div id="contents">
+<%#= submenu %>
+
+<div id="main">
+
+<%#= message %>
+
+<%= pagetitle :title => "database tables" %>
+
+<%= flash_tag %>
+
+<!-- div class="commonBtnArea">
+<div class="leftBox">
+<%#= search_tag %>
+</div>
+<div class="rightBox">
+<%#= csv_button_tag %>
+<%#= new_button_tag %>
+</div>
+<!--/ commonBtnArea--><!--/div-->
+
+<div class="list">
+<%#= paginate_tag @tables %>
+<%= counter_tag :size => @tables.size %>
+<table class="commonList">
+<thead>
+  <tr>
+    <th><%=h "table" %></th>
+  </tr>
+</thead>
+<tbody>
+<% @tables.each do |table| %>
+  <tr>
+    <td><%=link_to table, :controller => :databases, :action => :index, :tablename=> table %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<!--/ list--></div>
+
+<div class="commonBtnArea">
+<div class="centerBox">
+<%= close_button_tag %>
+</div>
+<!--/ commonBtnArea--></div>
+
+<!--/ #main--></div>
+<!--/ #contents--></div>

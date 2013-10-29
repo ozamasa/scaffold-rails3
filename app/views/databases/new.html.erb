@@ -1,0 +1,58 @@
+<% form_for(@database, :url => { :action => :create, :tablename => @tablename }, :html => { :method => :post }) do |f| %>
+
+<%#= menu %>
+<div id="contents">
+<%#= submenu %>
+
+<div id="main">
+
+<%= message %>
+
+<%= pagetitle :title => "database [" + @tablename + "]" %>
+
+<div class="sheet">
+
+<%= error_messages(@database) %>
+<%= flash_tag %>
+
+<% content_for :button do %>
+<div class="commonBtnArea">
+<div class="centerBox">
+<%= submit_button_tag(f, :value => '/images/btn_create.png') %>
+<%= index_button_tag %>
+</div>
+<!--/ commonBtnArea--></div>
+<% end %>
+
+<%#= yield :button %>
+
+<%= pagesubtitle %>
+<%= required_notice_tag %>
+
+<table class="commonSheet">
+<% @columns.each do |column| %>
+<tr>
+<th><%= f.label column.name %><%#=hlabel @tablename.singularize, column.name %></th>
+<td>
+  <% if ["id","created_at","updated_at"].include?(column.name) -%>
+  <% if column.type.to_s == "datetime" -%>
+  <%=hdatetime @database[column.name] -%>
+  <% else -%>
+  <%=h @database[column.name] -%>
+  <% end -%>
+  <% else -%>
+  <%= f.text_field column.name -%>
+  <% end -%>
+</td>
+</tr>
+<% end %>
+</table>
+
+</div>
+
+<%= yield :button %>
+
+<!--/ #main--></div>
+<!--/ #contents--></div>
+
+<% end %>

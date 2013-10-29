@@ -1,0 +1,67 @@
+<%#= menu %>
+
+<div id="contents">
+<%#= submenu %>
+
+<div id="main">
+
+<%#= message %>
+
+<%= pagetitle :title => "database [" + @tablename + "]" %>
+
+<%= flash_tag %>
+
+<div class="commonBtnArea">
+<div class="leftBox">
+<%= search_tag %>
+</div>
+<div class="rightBox">
+<%= csv_button_tag %>
+<%= new_button_tag :params => {:tablename => @tablename} %>
+</div>
+<!--/ commonBtnArea--></div>
+
+<div class="list">
+<%#= paginate_tag @databases %>
+<%= counter_tag %>
+<table class="commonList">
+<thead>
+  <tr>
+<% @columns.each do |column| %>
+    <th><%=h column.name %></th>
+<% end %>
+  </tr>
+</thead>
+<tbody>
+<% @databases.each do |database| %>
+  <tr>
+<% @columns.each do |column| %>
+    <td><%=link_to database[column.name].blank? ? "": database[column.name].to_s, :controller => :databases, :action => :edit, :tablename => @tablename, :id => database["id"].to_s %></td>
+<% end %>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<!--/ list--></div>
+
+<div class="commonBtnArea">
+<div class="leftBox">
+<% form_tag({ :action => :import, :tablename => @tablename }, { :multipart => true, :method => :post }) do  %>
+<h3><%= hlabel :import, :file %></h3>
+<%#= note "Let's write an explanatory note later!" %><br>
+
+<%= file_field_tag :file %>
+<%= submit_tag hlabel(:import, :button), :confirm => hlabel(:import, :message) %>
+<% end %>
+</div>
+<!--/ commonBtnArea--></div>
+
+<div class="commonBtnArea">
+<div class="centerBox">
+<%= index_button_tag :action => :list %>
+</div>
+<!--/ commonBtnArea--></div>
+
+
+<!--/ #main--></div>
+<!--/ #contents--></div>
