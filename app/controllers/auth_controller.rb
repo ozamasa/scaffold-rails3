@@ -12,13 +12,13 @@ class AuthController < ApplicationController
     if request.post?
       begin
         user = User.authenticate(params[:id], params[:password])
-        raise if user.blank?
+        raise unless user
         session[:user_id] = user.id
         Log.create(:user_id => user.id, :action => action_name)
         redirect_to(top_url)
       rescue => e
         flash.now[:notice] = t(:error_login)
-        Log.create(:user_id => 0, :action => action_name, :error => params[:id] + " " + t(:error_login) + " " + e.message)
+        Log.create(user_id: 0, action: action_name, error: "#{params[:id]} #{t(:error_login)} #{e.message}")
       end
     end
   end

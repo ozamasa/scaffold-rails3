@@ -430,9 +430,8 @@ EOS
     value    ||= options[:value]      || "修正する"
     controller = options[:controller] || controller_name
     confirm    = options[:confirm]
-    onclick    = options[:onclick]
 
-    link_to button_tag(value, class: "btn btn-primary", type: :submit ), {confirm: confirm, onclick: onclick}
+    button_tag(value, class: "btn btn-primary", type: :submit ,confirm: confirm)
   end
 
   # ポップ

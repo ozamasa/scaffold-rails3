@@ -1,64 +1,25 @@
-<div id="header">
-<h1><%= APP_TITLE %></h1>
-<!--/ #header--></div>
+<%= pagetitle title: "ログイン" %>
+<%= flash_tag %>
 
-<div id="contents">
-<div id="sub">
-<!--/ #sub--></div>
-<div id="main">
-<div class="pageTitle">
-<h2>ログイン</h2>
-</div>
-
-<% unless flash.blank? %>
-<div class="errorMessage">
-<p><%= flash[:notice] %></p>
-</div>
-<% end %>
-
+<div class="well">
 <%= form_tag do %>
-<div id="loginArea">
-<div id="login">
-  <div style="width: 100%;">
-    <div class="corner">
-        <div class="corner1"></div>
-        <div class="corner2"></div>
-        <div class="corner3"></div>
-        <div class="corner4"></div>
-    </div>
-    <div class="corner5_3">
-      <fieldset>
-        <legend>ログイン</legend>
-          <dl>
-            <dt><label for="id">ログイン名</label></dt>
-              <dd>
-                <%= text_field_tag :id, params[:id] %>
-        </dd>
-            <dt><label for="password">パスワード</label></dt>
-              <dd>
-                <%= password_field_tag :password, params[:password] %>
-        </dd>
-          </dl>
-          <p class="login">
-        <%= image_submit_tag("/assets/btn_login.png", :alt=> 'ログイン') %>
-          </p>
-      </fieldset>
-    </div>
-    <div class="corner">
-        <div class="corner4"></div>
-        <div class="corner3"></div>
-        <div class="corner2"></div>
-        <div class="corner1"></div>
+<fieldset>
+  <div class="form-group">
+    <%= label_tag :id, "ログイン名", class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= text_field_tag :id, params[:id] %>
     </div>
   </div>
-</div>
+  <div class="form-group">
+    <%= label_tag :password, "パスワード", class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= password_field_tag :password, params[:password] %>
+    </div>
+  </div>
 
-<div id="loginBottom"></div>
-<!--/ #loginArea--></div>
+  <div class="form-actions col-lg-10 col-lg-offset-2">
+    <%= button_tag("ログイン", class: "btn btn-primary", type: :submit) %>
+  </div>
+</fieldset>
 <% end %>
-
-<!--/ #main--></div>
-<!--/ #contents--></div>
-
-<div id ="footer">
-<!--/ #footer--></div>
+</div>
