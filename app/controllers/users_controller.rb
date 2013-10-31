@@ -10,27 +10,27 @@ class UsersController < ApplicationController
 
     @app_search.query = "users.id like ? or users.account like ? or users.name like ? "
 
-    conditionquery  = @app_search.condition_query
+#    conditionquery  = @app_search.condition_query
 #    conditionquery += " and " unless conditionquery.blank? or !params[:checkstop].blank?
-    conditionparam  = @app_search.condition_keyword
+#    conditionparam  = @app_search.condition_keyword
 
     alls = User.all(
-            :include => [],
-            :conditions => [conditionquery] + conditionparam,
-#            :conditions => @app_search.conditions,
-#            :conditions => ["users.name like ? or users.cd like ? or users.kana like ? or users.url like ? or users.memo like ? ", @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword],
-#            :conditions => [@app_search.condition_query] + @app_search.condition_keyword,
-#            :conditions => [@app_search.condition_query + " and users.name = ?"] + @app_search.condition_keyword << 'abc',
-            :order => @app_search.orderby
+#            include: [],
+#            conditions: [conditionquery] + conditionparam,
+            conditions: @app_search.conditions,
+#            conditions: ["users.name like ? or users.cd like ? or users.kana like ? or users.url like ? or users.memo like ? ", @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword],
+#            conditions: [@app_search.condition_query] + @app_search.condition_keyword,
+#            conditions: [@app_search.condition_query + " and users.name = ?"] + @app_search.condition_keyword << 'abc',
+            order: @app_search.orderby
            )
     @counter = alls.length
     @users = alls.paginate(page: params[:page], per_page: PAGINATE_PER_PAGE)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.csv  { send_data(alls.to_csv(User), type: "text/csv") }
-      format.xls  { send_data(alls.to_xls(User), type: "application/excel", disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xls") }
-      format.xml  { send_data(alls.to_xml,         type: "text/xml; charset=utf8;", disposition: "attachement") }
+      format.html
+      format.csv  { send_data(alls.to_csv(Sample), type: "text/csv",                disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.csv") }
+      format.xls  { send_data(alls.to_xls(Sample), type: "application/excel",       disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xls") }
+      format.xml  { send_data(alls.to_xml,         type: "text/xml; charset=utf8;", disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xml") }
     end
   end
 

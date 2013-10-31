@@ -9,23 +9,23 @@
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :name, class: "col-lg-2 control-label #{required}" %>
+      <%= f.label :name, class: "col-lg-2 control-label required" %>
       <div class="col-lg-10">
         <%= f.text_field :name, class: "form-control" unless show? %>
         <%= h @user.name if show? %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :account, class: "col-lg-2 control-label #{required}" %>
+      <%= f.label :account, class: "col-lg-2 control-label required" %>
       <div class="col-lg-10">
         <%= f.text_field :account, class: "form-control" unless show? %>
         <%= h @user.account if show? %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :password, class: "col-lg-2 control-label #{required}" %>
+      <%= f.label :password, class: "col-lg-2 control-label required" %>
       <div class="col-lg-10">
-        <%= f.text_field :password, class: "form-control" unless show? %>
+        <%= f.password_field :password, class: "form-control" unless show? %>
         <%= h @user.password if show? %>
       </div>
     </div>

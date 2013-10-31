@@ -196,16 +196,8 @@ EOS
     return raw str
   end
 
-  # 必須マーク
-  def required
-    return if show?
-    "required"
-  end
-
   # 必須入力メッセージ文言
   def required_notice_tag(options = {})
-    return if show?
-
     str =<<"EOS"
 <p><font color="red">*</font>印のついた項目は、必ず入力してください。</p>
 EOS
@@ -347,19 +339,15 @@ EOS
   <div class="col-lg-12">
     <div class="well">
     <h4>#{hlabel(:commons, :upload_file)}</h4>
-#{form_tag :action => :upload, :multipart => true, :method => :post, :class=>"form-horizontal"}
+#{form_tag({action: :upload}, {:multipart => true, :method => :post, :class=>"form-horizontal"})}
     <fieldset>
       <p class="help-block">
       インポートするファイルは「CSV出力」で出力したファイルを編集してください。<br>
       データを新規登録する場合は「ID」列を空白にしてください。<br>
       </p>
       <div class="form-group">
-      <div class="input-group">
 #{file_field_tag(:file)}
-      <span class="input-group-btn">
-#{button_tag("インポート", type: :submit, class: "btn btn-primary", confirm: "インポートしますか？")}
-      </span>
-      </div>
+#{button_tag("インポート", type: :submit, class: "btn btn-primary", style: "margin: 21px  1px", confirm: "インポートしますか？")}
       </div>
     </fieldset>
 </form>
@@ -372,7 +360,7 @@ EOS
 
   # 参照画面？
   def show?
-    return action_name == :show.to_s
+    return action_name == "show"
   end
 
   # リセットボタン
@@ -460,17 +448,13 @@ EOS
     confirm    = options[:confirm]    || "帳票を出力しますか？"
 
     url = url_for(params.merge(params))
+    url = url_for(params.merge(:format => :xls))
     link_to button_tag(value, class: "btn btn-default pull-right", style: "margin: 21px 1px"), url, {confirm: confirm, target: '_blank'}
   end
 
   # ポップ
   def pop_button_tag(path, size, elm, type, options = {})
-    link_to button_tag("検索", class: "btn btn-default"), "javascript:popSearch('" + path + "','" + size.to_s + "','" + elm + "','','" + type + "');"
-  end
-
-  # 検索ポップアップ
-  def pop_search_tag(elm, type)
-    pop_button_tag('/search', 750, elm, type)
+    link_to button_tag("ポップアップ", class: "btn btn-default"), "javascript:popSearch('" + path + "','" + size.to_s + "','" + elm + "','','" + type + "');"
   end
 
   # 閉じるボタン

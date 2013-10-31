@@ -3,8 +3,6 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  require 'active_record_helper'
-  require 'action_view_helper'
   require 'active_support_csv'
   require 'will_paginate/array'
   require "will_paginate-bootstrap"

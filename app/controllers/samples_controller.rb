@@ -12,27 +12,27 @@ class SamplesController < ApplicationController
 
     @app_search.query = "samples.id like ? or samples.name like ? or samples.zip like ? or samples.prefecture like ? or samples.address like ? or samples.building like ? or samples.kana like ? or samples.url like ? or samples.memo like ?"
 
-    conditionquery  = @app_search.condition_query
+#    conditionquery  = @app_search.condition_query
 #    conditionquery += " and " unless conditionquery.blank? or !params[:checkstop].blank?
-    conditionparam  = @app_search.condition_keyword
+#    conditionparam  = @app_search.condition_keyword
 
     alls = Sample.all(
-            :include => [],
-            :conditions => [conditionquery] + conditionparam,
-#            :conditions => @app_search.conditions,
-#            :conditions => ["samples.name like ? or samples.cd like ? or samples.kana like ? or samples.url like ? or samples.memo like ? ", @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword],
-#            :conditions => [@app_search.condition_query] + @app_search.condition_keyword,
-#            :conditions => [@app_search.condition_query + " and samples.name = ?"] + @app_search.condition_keyword << 'abc',
-            :order => @app_search.orderby
+#            include: [],
+            conditions: @app_search.conditions,
+#            conditions: [conditionquery] + conditionparam,
+#            conditions: ["samples.name like ? or samples.cd like ? or samples.kana like ? or samples.url like ? or samples.memo like ? ", @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword, @app_search.keyword],
+#            conditions: [@app_search.condition_query] + @app_search.condition_keyword,
+#            conditions: [@app_search.condition_query + " and samples.name = ?"] + @app_search.condition_keyword << 'abc',
+            order: @app_search.orderby
            )
     @counter = alls.length
     @samples = alls.paginate(page: params[:page], per_page: PAGINATE_PER_PAGE)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.csv  { send_data(alls.to_csv(Sample), type: "text/csv") }
-      format.xls  { send_data(alls.to_xls(Sample), type: "application/excel", disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xls") }
-      format.xml  { send_data(alls.to_xml,         type: "text/xml; charset=utf8;", disposition: "attachement") }
+      format.html
+      format.csv  { send_data(alls.to_csv(Sample), type: "text/csv",                disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.csv") }
+      format.xls  { send_data(alls.to_xls(Sample), type: "application/excel",       disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xls") }
+      format.xml  { send_data(alls.to_xml,         type: "text/xml; charset=utf8;", disposition: "attachement", filename: "#{controller_name}#{Time.now.strftime('%Y%m%d%H%M%S')}.xml") }
     end
   end
 

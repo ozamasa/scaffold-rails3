@@ -1,6 +1,9 @@
 # encoding: utf-8
 class ApplicationUpload
 
+  require 'csv'
+  require 'kconv'
+
   attr_accessor :filename
   attr_accessor :content_type
   attr_accessor :size
@@ -14,7 +17,7 @@ class ApplicationUpload
   attr_accessor :flag_new
 
   def initialize(file)
-    unless file.blank?
+    if file
       begin
         @filename = file.original_filename.gsub(/[^\w!\#$%&()=^~|@`\[\]\{\};+,.-]/u, '')
         @content_type = file.content_type.gsub(/[^\w.+;=_\/-]/n, '')
@@ -27,8 +30,6 @@ class ApplicationUpload
 
 
   def to_a
-    require 'csv'
-
     arrs = []
     begin
       CSV.parse(@data){|line|
@@ -49,7 +50,6 @@ class ApplicationUpload
     @ccnt = 0
     @ucnt = 0
     @error_msg = ""
-
     upload_msga  = []
     self.to_a.each_with_index{|row,i|
       if i > 0
@@ -64,7 +64,7 @@ class ApplicationUpload
 
 #    upload_msgs = "\n" + upload_msga.join("\n") + "\n"
     upload_msgs = "#{@ccnt}件を追加しました。#{@ucnt}件を更新しました。#{@ecnt}件のエラーがありました。" + @error_msg
-Rails.logger.info "\nCSV import error (#{instance.name}):\n  #{@error_msg}\n\n" if @ecnt > 0
+    Rails.logger.info "\nCSV import error (#{instance.name}):\n  #{@error_msg}\n\n" if @ecnt > 0
     return upload_msgs
   end
 

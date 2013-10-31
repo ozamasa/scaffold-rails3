@@ -198,7 +198,7 @@ ja:
     models:
       sample: "サンプル"
       user: "ユーザー"
-      master: "マスタ管理"
+      master: "設定"
     attributes:
       member:
         id: "ID"
