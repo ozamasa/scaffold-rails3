@@ -1,39 +1,39 @@
 <div class="well">
 <%= required_notice_tag %>
-<%= form_for @user, html: {class: "bs-example form-horizontal"} do |f| %>
+<%= form_for @user, html: {class: "bs-example"} do |f| %>
   <fieldset>
     <div class="form-group">
-      <%= f.label :id, class: "col-lg-2 control-label" %>
-      <div class="col-lg-10">
+      <%= f.label :id, class: "control-label" %>
+      <div class="">
         <%= h @user.id %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :name, class: "col-lg-2 control-label required" %>
-      <div class="col-lg-10">
+      <%= f.label :name, class: "control-label required" %>
+      <div class="">
         <%= f.text_field :name, class: "form-control" unless show? %>
         <%= h @user.name if show? %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :account, class: "col-lg-2 control-label required" %>
-      <div class="col-lg-10">
+      <%= f.label :account, class: "control-label required" %>
+      <div class="">
         <%= f.text_field :account, class: "form-control" unless show? %>
         <%= h @user.account if show? %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :password, class: "col-lg-2 control-label required" %>
-      <div class="col-lg-10">
+      <%= f.label :password, class: "control-label required" %>
+      <div class="">
         <%= f.password_field :password, class: "form-control" unless show? %>
         <%= h @user.password if show? %>
       </div>
     </div>
 
-    <div class="form-actions col-lg-offset-2">
+    <div class="form-actions">
 <%= submit_button_tag %>
 <%= index_button_tag %>
-<%= delete_button_tag @user %>
+<%= delete_button_tag @user if show? %>
     </div>
   </fieldset>
 <% end %>
