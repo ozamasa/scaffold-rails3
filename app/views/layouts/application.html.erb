@@ -52,8 +52,8 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li><a><%= "#{@app_user.name} さん" %></a></li>
-          <li><%= link_to("パスワード変更",   "javascript:void(0);", :onclick => sanitize("javascript:pop('" + url_for(:controller => :auth, :action => :password ) + "', '600', 'passwordsetting');")) %></li>
-          <li><%= link_to('ログアウト', :controller => :auth, :action => :logout ) %></li>
+          <li><%= link_to("パスワード変更", :controller => :auth, :action => :password ) %></li>
+          <li><%= link_to("ログアウト", :controller => :auth, :action => :logout ) %></li>
         </ul>
         <% end %>
       </div>

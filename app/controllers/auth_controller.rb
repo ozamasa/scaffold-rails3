@@ -14,7 +14,7 @@ class AuthController < ApplicationController
         user = User.authenticate(params[:id], params[:password])
         raise unless user
         session[:user_id] = user.id
-        Log.create(:user_id => user.id, :action => action_name)
+        Log.create(user_id: user.id, action: action_name)
         redirect_to(top_url)
       rescue => e
         flash.now[:notice] = t(:error_login)
@@ -24,7 +24,7 @@ class AuthController < ApplicationController
   end
 
   def logout
-    Log.create(:user_id => session[:user_id], :action => action_name) rescue nil
+    Log.create(user_id: session[:user_id], action: action_name) rescue nil
     session_reset
     redirect_to(root_url)
   end
@@ -38,32 +38,29 @@ class AuthController < ApplicationController
     @display_type = DISPLAY_TYPE_SIMPLE
 
     begin
-      @user = User.find(params[:user][:id])
-#      redirect_to(:action => :password, :id => @app.user.id) and return unless updated?
+      @app_user = User.find(params[:user][:id])
 
       if request.put?
-        @user.attributes=params[:user]
+        @app_user.attributes = params[:user]
 
         if params[:user][:password] != params[:user][:password_confirmation]
           flash[:notice] = t(:error_pwd_match);
-          render :action => :password, :status => 400 and return
+          render action: :password, status: 400 and return
         end
 
-        if User.authenticate( @user.account, params[:user][:password_required] ).blank?
+        if User.authenticate( @app_user.account, params[:user][:password_required] ).blank?
           flash[:notice] = t(:error_login)
-          render :action => :password, :status => 400 and return
+          render action: :password, status: 400 and return
         end
 
-        User.transaction do
-          @update_flag = @user.save!
-          flash[:notice] = t(:success_updated, :id => @user.name)
-        end
+        @app_user.save!
+        flash[:notice] = t(:success_updated, id: @app_user.name)
       end
 
     rescue
-      render :action => :password, :status => 400 and return
+      render action: :password, status: 400 and return
     end
-    render :action => :password
+    render action: :password
   end
 
 protected
