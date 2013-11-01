@@ -12,14 +12,14 @@ Ruby       : 2.0.0
 Rails      : 3.2.14
 
 [アプリケーション]
-OSユーザ     : r3base/pass
-RAILS_ROOT   : /var/share/r3base
+OSユーザ     : [xxxx]/pass
+RAILS_ROOT   : /var/share/[xxxx]
 
 MySQL(root)  : root/pass
-MySQLユーザ  : r3base/pass
-DB           : r3base
+MySQLユーザ  : [xxxx]/pass
+DB           : [xxxx]
 
-ホスト名     : r3base.example.com
+ホスト名     : [xxxx].example.com
 
 **********************************************************************
  2 Ubuntu のインストール
@@ -31,11 +31,11 @@ Ubuntu Serverをインストールします。
   ※「日本語」を選択します。
 
 ホスト名を設定します。
-  r3base.example.com」を入力します。
+  [xxxx].example.com」を入力します。
 
 ユーザの設定をします。
-  ※フルネームには「r3base」を入力します。
-  ※アカウントには「r3base」を入力します。
+  ※フルネームには「[xxxx]」を入力します。
+  ※アカウントには「[xxxx]」を入力します。
   ※パスワードには「pass」を入力します。
   ※脆弱なパスワードの確認は「はい」を選択します。
 
@@ -74,7 +74,7 @@ GRUBブートローダの設定をします。
 
 Ubuntu のインストールが完了します。
 
-ユーザ「r3base」でログインします。
+ユーザ「[xxxx]」でログインします。
 
 rootユーザーに変更します。
 
@@ -152,7 +152,7 @@ Sambaを再起動します。
 
 Sambaユーザを追加します。
 
-  # pdbedit -a r3base
+  # pdbedit -a [xxxx]
 
   ※パスワードには「pass」を入力します。
 
@@ -254,12 +254,12 @@ Phusion Passengerをインストールします。
 
 Samba経由でソースコードを配置します。
 
-  ※「\\(server)\share\r3base」となるようにディレクトリをコピーします。
+  ※「\\(server)\share\[xxxx]」となるようにディレクトリをコピーします。
 
 ディレクトリのオーナーを変更します。（念のため）
 
   # cd /var/share/
-  # chown -R r3base:r3base /var/share/r3base
+  # chown -R [xxxx]:[xxxx] /var/share/[xxxx]
 
 ======================================================================
  8.2 gemライブラリ のインストール
@@ -267,7 +267,7 @@ Samba経由でソースコードを配置します。
 
 bundler で gemライブラリをインストールします。
 
-  # cd /var/share/r3base
+  # cd /var/share/[xxxx]
   # bundle install --without test development
 
 ======================================================================
@@ -277,16 +277,16 @@ bundler で gemライブラリをインストールします。
 MySQLにデータベースとユーザを作成します。
 
   # mysql -u root -ppass  \
-  > -e "create database r3base; \
-  >     grant all privileges on r3base.* to r3base@localhost identified by 'pass';"
+  > -e "create database [xxxx]; \
+  >     grant all privileges on [xxxx].* to [xxxx]@localhost identified by 'pass';"
 
-  ※ここでは「r3base」データベースを作成し、ユーザー「r3base/pass」を作成するものとします。
+  ※ここでは「[xxxx]」データベースを作成し、ユーザー「[xxxx]/pass」を作成するものとします。
   ※パスワードは環境に応じて適切に設定してください。
 
-r3base ユーザに変更します。
+[xxxx] ユーザに変更します。
 
-  # su - r3base
-  $ cd /var/share/r3base
+  # su - [xxxx]
+  $ cd /var/share/[xxxx]
 
 DB接続ファイルを編集します。
 
@@ -306,10 +306,10 @@ Apacheに設定を追加します。
 
   $ sudo su -
 
-  # cp /var/share/r3base/config/sites/passenger.conf \
+  # cp /var/share/[xxxx]/config/sites/passenger.conf \
   > /etc/apache2/conf.d/passenger.conf
 
-  # ln -s /var/share/r3base/config/sites/apache.conf \
+  # ln -s /var/share/[xxxx]/config/sites/apache.conf \
   > /etc/apache2/conf.d/
 
 Apacheの追加モジュールを有効にします。
@@ -331,7 +331,7 @@ Apacheの追加モジュールを有効にします。
 
 ここまでの手順でアプリケーションにアクセスすることができます。
 
-  公開画面   : http://r3base.example.com/
+  公開画面   : http://[xxxx].example.com/
 
 次のユーザでログインできます。
 
@@ -344,8 +344,8 @@ Apacheの追加モジュールを有効にします。
 
 phpMyAdminには以下からアクセスすることができます。
 
-  公開画面   : http://r3base.example.com:8080/phpmyadmin/
+  公開画面   : http://[xxxx].example.com:8080/phpmyadmin/
 
-  ※MySQLのrootユーザ、または、r3baseユーザでログインできます。
+  ※MySQLのrootユーザ、または、[xxxx]ユーザでログインできます。
 
 **********************************************************************

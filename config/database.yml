@@ -1,13 +1,13 @@
 # MySQL 5.x
-#   create database r3base;
-#   grant all privileges on r3base.* to r3base@localhost identified by 'pass';
+#   create database [xxxx];
+#   grant all privileges on [xxxx].* to [xxxx]@localhost identified by 'pass';
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: r3base
+  database: [xxxx]
   pool: 5
-  username: r3base
+  username: [xxxx]
   password: pass
   host: localhost
 
@@ -15,9 +15,9 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: r3base
+  database: [xxxx]
   pool: 5
-  username: r3base
+  username: [xxxx]
   password: pass
   host: localhost
 

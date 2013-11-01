@@ -1,4 +1,4 @@
-R3base::Application.routes.draw do
+ScaffoldRails3::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
