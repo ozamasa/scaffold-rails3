@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-ScaffoldRails3::Application.load_tasks
+[XXXX]::Application.load_tasks
