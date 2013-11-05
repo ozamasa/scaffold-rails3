@@ -5,7 +5,7 @@
 class ApplicationController < ActionController::Base
   require 'active_support_csv'
   require 'will_paginate/array'
-  require "will_paginate-bootstrap"
+  require 'will_paginate-bootstrap'
 
   before_filter :authorize
 

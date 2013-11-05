@@ -1,3 +1,10 @@
+== This is .
+
+This when making application with rails3, is something which becomes the base.
+Searching [xxxx], please substitute.
+Thanks.
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create

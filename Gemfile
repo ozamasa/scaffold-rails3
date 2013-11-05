@@ -19,16 +19,10 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-#  gem 'sass-rails',   '~> 3.2.3'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-#  gem 'therubyracer', :platforms => :ruby
-
   gem 'less-rails' #, '~> 2.3.2'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'therubyracer' # , '>= 0.11.4', :require => 'v8'
   gem 'uglifier', '>= 1.0.3'
-#  gem 'twitter-bootstrap-rails'
   gem 'less-rails-bootstrap'
   gem 'twitter-bootswatch-rails', '~> 3.0'
   gem 'twitter-bootswatch-rails-fontawesome'
